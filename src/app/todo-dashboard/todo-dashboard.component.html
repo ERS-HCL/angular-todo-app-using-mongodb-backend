@@ -1,0 +1,59 @@
+<article class="message is-success ">
+  <div class="message-header is-uppercase">
+    <p>Todo Dashboard</p>
+    <p><button class="button is-outlined is-danger" (click)="clearAll()">CLEAR ALL TODO</button></p>
+  </div>
+  <div class="message-body">
+    <form #f="ngForm" (ngSubmit)="onSubmitTodo(f)">
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Description</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <p class="control">
+              <input class="input is-success" [class.is-danger]="!desc.valid && desc.touched" type="text" ngModel name="desc" #desc="ngModel" required>
+            </p>
+            <div *ngIf="!desc.valid && desc.touched">
+              <div *ngIf="desc.errors.required">Field required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Priority</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <div class="select is-success" [class.is-danger]="!priority.valid && priority.touched">
+                <select ngModel name="priority" #priority="ngModel" required>
+                      <option value="">--select priority--</option>
+                      <option value="Low">Low</option>
+                      <option value="Medium">Medium</option>
+                      <option value="High">High</option>
+                </select>
+              </div>
+              <div *ngIf="!priority.valid && priority.touched">
+                <div *ngIf="priority.errors.required">Field required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label"></label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="button is-success is-outlined" type="submit" value="ADD TODO">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</article>
