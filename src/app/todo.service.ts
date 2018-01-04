@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
 export class TodoService {
 
     private URL = 'http://localhost:3000/api';
+
     constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>, private _router: Router) {
 
     }
+
+    //All api call is from backend calling the getTodos() 
 
     addTodo(todo) {
         this._http.post(this.URL + '/todos', todo).subscribe(todos => { this.ngRedux.dispatch({ type: 'ADD_TODO', todos: todos }); });
