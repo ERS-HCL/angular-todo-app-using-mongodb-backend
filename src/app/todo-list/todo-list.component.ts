@@ -15,7 +15,7 @@ export class TodoListComponent implements OnInit {
   constructor(private ngRedux: NgRedux<IAppState>, private _todoService: TodoService) { }
 
   ngOnInit() {
-   this._todoService.getTodos();
+    this._todoService.getTodos();
   }
 
   removeTodo(id) {
@@ -23,9 +23,8 @@ export class TodoListComponent implements OnInit {
   }
 
   toogleTodo(id, isCompleted) {
-     isCompleted = !isCompleted;
-    console.log(isCompleted);
-    console.log(isCompleted);
-    this._todoService.toggleTodo(id, isCompleted);
+    isCompleted = !isCompleted;
+    let lastUpdated = new Date();
+    this._todoService.toggleTodo(id, isCompleted, lastUpdated);
   }
 }

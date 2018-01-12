@@ -14,10 +14,8 @@ export class TodoService {
 
     }
 
-    //All api call is from backend calling the getTodos() 
-
     addTodo(todo) {
-        this._http.post(this.URL + '/todos', todo).subscribe(todos => { this.ngRedux.dispatch({ type: 'ADD_TODO', todos: todos }); });
+        this._http.post(this.URL + '/todos', todo).subscribe(todo => this.ngRedux.dispatch({ type: 'ADD_TODO', todo: todo }));
     }
 
     getTodos() {
@@ -28,10 +26,10 @@ export class TodoService {
     }
 
     removeTodo(id) {
-        this._http.delete(this.URL + '/todos/' + id).subscribe(todos => { this.ngRedux.dispatch({ type: 'REMOVE_TODO', todos: todos }); });
+        this._http.delete(this.URL + '/todos/' + id).subscribe(todoId => { this.ngRedux.dispatch({ type: 'REMOVE_TODO', todoId: todoId }); });
     }
 
-    toggleTodo(id, isCompleted) {
-        this._http.patch(this.URL + '/todos/' + id, { 'isCompleted': isCompleted }).subscribe(todos => { this.ngRedux.dispatch({ type: 'TOOGLE_TODO', todos: todos }); });
+    toggleTodo(id, isCompleted, lastUpdated) {
+        this._http.patch(this.URL + '/todos/' + id, { 'isCompleted': isCompleted, 'lastUpdated': lastUpdated }).subscribe(todo => { this.ngRedux.dispatch({ type: 'TOOGLE_TODO', todo: todo }); });
     }
 }
