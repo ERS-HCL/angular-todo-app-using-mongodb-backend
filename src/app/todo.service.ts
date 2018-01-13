@@ -4,34 +4,31 @@ import { Observable } from 'rxjs/Observable';
 import { ITodo } from './todo.model';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from './store';
-import { Router } from '@angular/router';
+
 @Injectable()
 export class TodoService {
 
-    private URL = 'http://localhost:3000/api';
+    private URL = 'https://sleepy-citadel-54178.herokuapp.com/api/';
 
-    constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>, private _router: Router) {
+    constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) {
 
     }
 
-    //All api call is from backend calling the getTodos() 
-
     addTodo(todo) {
-        this._http.post(this.URL + '/todos', todo).subscribe(todos => { this.ngRedux.dispatch({ type: 'ADD_TODO', todos: todos }); });
+        this._http.post(this.URL + '/todos', todo).subscribe(todo => this.ngRedux.dispatch({ type: 'ADD_TODO', todo: todo }));
     }
 
     getTodos() {
         this._http.get(this.URL + '/todos').subscribe(todos => {
-            console.log(todos);
             this.ngRedux.dispatch({ type: 'FETCH_TODO_SUCCESS', todos: todos });
         });
     }
 
     removeTodo(id) {
-        this._http.delete(this.URL + '/todos/' + id).subscribe(todos => { this.ngRedux.dispatch({ type: 'REMOVE_TODO', todos: todos }); });
+        this._http.delete(this.URL + '/todos/' + id).subscribe(todoId => { this.ngRedux.dispatch({ type: 'REMOVE_TODO', todoId: todoId }); });
     }
 
-    toggleTodo(id, isCompleted) {
-        this._http.patch(this.URL + '/todos/' + id, { 'isCompleted': isCompleted }).subscribe(todos => { this.ngRedux.dispatch({ type: 'TOOGLE_TODO', todos: todos }); });
+    toggleTodo(id, isCompleted, lastUpdated) {
+        this._http.patch(this.URL + '/todos/' + id, { 'isCompleted': isCompleted, 'lastUpdated': lastUpdated }).subscribe(todo => { this.ngRedux.dispatch({ type: 'TOOGLE_TODO', todo: todo }); });
     }
 }

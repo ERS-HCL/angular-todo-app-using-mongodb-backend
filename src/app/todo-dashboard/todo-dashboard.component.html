@@ -12,7 +12,8 @@
         <div class="field-body">
           <div class="field">
             <p class="control">
-              <input class="input is-success" [class.is-danger]="!desc.valid && desc.touched" type="text" ngModel name="desc" #desc="ngModel" required>
+              <input class="input is-success" [class.is-danger]="!desc.valid && desc.touched" type="text" ngModel name="desc" #desc="ngModel"
+                required>
             </p>
             <div *ngIf="!desc.valid && desc.touched">
               <div *ngIf="desc.errors.required">Field required</div>
@@ -49,11 +50,12 @@
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input class="button is-success is-outlined" type="submit" value="ADD TODO">
+              <input class="button is-success is-outlined"  [disabled]="!f.valid" type="submit" value="ADD TODO">
             </div>
           </div>
         </div>
       </div>
+
     </form>
   </div>
 </article>

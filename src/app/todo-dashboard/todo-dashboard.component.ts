@@ -17,24 +17,11 @@ export class TodoDashboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  model: ITodo = {
-    _id: '',
-    desc: '',
-    priority: ''
-  }
-
-  onSubmitTodo(todo) {
-    if (todo.valid) {
-      // this.model = todo.value;
-      // this.ngRedux.dispatch({ type: ADD_TODO, payload: { todo: this.model } });
-      console.log(todo.value);
-      this._todoService.addTodo(todo.value);
-
+  onSubmitTodo(form) {
+    if (form.valid) {
+      form.value.lastUpdated = new Date();
+      this._todoService.addTodo(form.value);
     }
-  }
-
-  clearAll() {
-    this.ngRedux.dispatch({ type: CLEAR_ALL });
   }
 
 }
