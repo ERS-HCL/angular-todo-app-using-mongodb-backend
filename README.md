@@ -1,6 +1,7 @@
-# TODO1
+# Todo App With Angular2+ and It consist only frontend part
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.2.
+## Technology used
+  `Angular5`, `Redux`, `Bulma', `lodash`
 
 ## Development server
 
