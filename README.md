@@ -15,4 +15,4 @@
 
 ## Further help
 
-To get more help on the this app go and check out the [way2programming todo app](http://way2programming.com/learning-git-part-2).
+To get more help on the this app go and check out the [way2programming todo app](http://way2programming.com/angular/todo-app).
