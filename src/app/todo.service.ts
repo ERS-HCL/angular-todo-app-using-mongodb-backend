@@ -4,13 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { ITodo } from './todo.model';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from './store';
-import { Router } from '@angular/router';
+
 @Injectable()
 export class TodoService {
 
-    private URL = 'http://localhost:3000/api';
+    private URL = 'https://sleepy-citadel-54178.herokuapp.com/api/';
 
-    constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>, private _router: Router) {
+    constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) {
 
     }
 
@@ -20,7 +20,6 @@ export class TodoService {
 
     getTodos() {
         this._http.get(this.URL + '/todos').subscribe(todos => {
-            console.log(todos);
             this.ngRedux.dispatch({ type: 'FETCH_TODO_SUCCESS', todos: todos });
         });
     }

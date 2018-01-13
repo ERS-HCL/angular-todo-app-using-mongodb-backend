@@ -14,8 +14,7 @@ import { Test1Component } from './test1/test1.component';
 
 import { TodoService } from './todo.service';
 import { NavbarComponent } from './navbar/navbar.component';
-const routes: Routes = [
-];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +24,7 @@ const routes: Routes = [
     NavbarComponent
   ],
   imports: [
-    BrowserModule, FormsModule, NgReduxModule, HttpClientModule, RouterModule.forRoot(routes)
+    BrowserModule, FormsModule, NgReduxModule, HttpClientModule
   ],
   providers: [TodoService],
   bootstrap: [AppComponent]

@@ -13,7 +13,8 @@ export const INITIAL_STATE = {
 export function rootReducer(state: IAppState, action): IAppState {
     switch (action.type) {
         case ADD_TODO: {
-            return Object.assign({}, state, { todos: state.todos.concat(Object.assign({}, action.todo)) });
+            _.reverse(state.todos);
+            return Object.assign({}, state, { todos:  _.reverse(state.todos.concat(Object.assign({}, action.todo))) });
         }
 
         case REMOVE_TODO: {
@@ -37,7 +38,7 @@ export function rootReducer(state: IAppState, action): IAppState {
         }
 
         case FETCH_TODO_SUCCESS: {
-            return Object.assign({}, state, { todos: action.todos });
+            return Object.assign({}, state, { todos: _.reverse(action.todos) });
         }
     }
     return state;
