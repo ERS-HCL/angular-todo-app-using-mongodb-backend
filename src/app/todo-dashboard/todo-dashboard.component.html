@@ -1,7 +1,6 @@
 <article class="message is-success ">
   <div class="message-header is-uppercase">
     <p>Todo Dashboard</p>
-    <!--<p><button class="button is-outlined is-danger" (click)="clearAll()">CLEAR ALL TODO</button></p>-->
   </div>
   <div class="message-body">
     <form #f="ngForm" (ngSubmit)="onSubmitTodo(f)">
@@ -50,12 +49,11 @@
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input class="button is-success is-outlined"  [disabled]="!f.valid" type="submit" value="ADD TODO">
+              <input class="button is-success is-outlined" [disabled]="!f.valid" type="submit" value="ADD TODO">
             </div>
           </div>
         </div>
       </div>
-
     </form>
   </div>
 </article>
