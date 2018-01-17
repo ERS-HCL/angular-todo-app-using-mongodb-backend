@@ -8,7 +8,7 @@ import { IAppState } from './store';
 @Injectable()
 export class TodoService {
 
-    private URL = 'https://sleepy-citadel-54178.herokuapp.com/api/';
+    private URL = 'http://localhost:4000/api';
 
     constructor(private _http: HttpClient, private ngRedux: NgRedux<IAppState>) {
 
