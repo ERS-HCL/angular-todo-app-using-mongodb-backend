@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ITodo } from './todo.model';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from './store';
+import { ADD_TODO,  REMOVE_TODO, FETCH_TODO_SUCCESS, TOOGLE_TODO } from './actions';
 
 @Injectable()
 export class TodoService {
@@ -15,20 +16,26 @@ export class TodoService {
     }
 
     addTodo(todo) {
-        this._http.post(this.URL + '/todos', todo).subscribe(todo => this.ngRedux.dispatch({ type: 'ADD_TODO', todo: todo }));
+        this._http.post(this.URL + '/todos', todo).subscribe(todo => {
+            this.ngRedux.dispatch({ type: ADD_TODO, todo: todo });
+        });
     }
 
     getTodos() {
         this._http.get(this.URL + '/todos').subscribe(todos => {
-            this.ngRedux.dispatch({ type: 'FETCH_TODO_SUCCESS', todos: todos });
+            this.ngRedux.dispatch({ type: FETCH_TODO_SUCCESS, todos: todos });
         });
     }
 
     removeTodo(id) {
-        this._http.delete(this.URL + '/todos/' + id).subscribe(todoId => { this.ngRedux.dispatch({ type: 'REMOVE_TODO', todoId: todoId }); });
+        this._http.delete(this.URL + '/todos/' + id).subscribe(todoId => { 
+            this.ngRedux.dispatch({ type: REMOVE_TODO, todoId: todoId }); 
+        });
     }
 
     toggleTodo(id, isCompleted, lastUpdated) {
-        this._http.patch(this.URL + '/todos/' + id, { 'isCompleted': isCompleted, 'lastUpdated': lastUpdated }).subscribe(todo => { this.ngRedux.dispatch({ type: 'TOOGLE_TODO', todo: todo }); });
+        this._http.patch(this.URL + '/todos/' + id, { 'isCompleted': isCompleted, 'lastUpdated': lastUpdated }).subscribe(todo => { 
+            this.ngRedux.dispatch({ type: TOOGLE_TODO, todo: todo }); 
+        });
     }
 }

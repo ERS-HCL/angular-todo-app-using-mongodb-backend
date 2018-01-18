@@ -10,7 +10,6 @@ import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.componen
 import { TodoListComponent } from './todo-list/todo-list.component';
 
 import { rootReducer, IAppState, INITIAL_STATE } from './store';
-import { Test1Component } from './test1/test1.component';
 
 import { TodoService } from './todo.service';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -20,7 +19,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppComponent,
     TodoDashboardComponent,
     TodoListComponent,
-    Test1Component,
     NavbarComponent
   ],
   imports: [

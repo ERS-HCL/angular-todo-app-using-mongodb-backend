@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../store';
-import { REMOVE_TODO, TOOGLE_TODO, FETCH_TODO_SUCCESS } from '../actions';
+import { REMOVE_TODO, TOOGLE_TODO } from '../actions';
 import { TodoService } from '../todo.service';
 
 @Component({

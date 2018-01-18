@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ADD_TODO, CLEAR_ALL } from '../actions';
+import { ADD_TODO } from '../actions';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store';
 import { ITodo } from '../todo.model';
@@ -21,6 +21,7 @@ export class TodoDashboardComponent implements OnInit {
     if (form.valid) {
       form.value.lastUpdated = new Date();
       this._todoService.addTodo(form.value);
+      form.reset()
     }
   }
 
