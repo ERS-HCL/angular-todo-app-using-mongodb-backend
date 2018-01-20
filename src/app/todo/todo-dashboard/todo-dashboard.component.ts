@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ADD_TODO } from '../actions';
 import { NgRedux } from '@angular-redux/store';
-import { IAppState } from '../store';
 import { ITodo } from '../todo.model';
 import { TodoService } from '../todo.service';
 
@@ -12,7 +11,7 @@ import { TodoService } from '../todo.service';
 })
 export class TodoDashboardComponent implements OnInit {
 
-  constructor(private ngRedux: NgRedux<IAppState>, private _todoService: TodoService) { }
+  constructor(private _todoService: TodoService) { }
 
   ngOnInit() {
   }

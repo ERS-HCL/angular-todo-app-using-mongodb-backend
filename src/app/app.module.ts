@@ -1,17 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NgRedux, NgReduxModule } from '@angular-redux/store';
+import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store';
 import { HttpClientModule } from '@angular/common/http';
+import { Reducer } from 'redux';
 
 import { AppComponent } from './app.component';
-import { TodoDashboardComponent } from './todo-dashboard/todo-dashboard.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoDashboardComponent } from './todo/todo-dashboard/todo-dashboard.component';
+import { TodoListComponent } from './todo/todo-list/todo-list.component';
+import { GlobalMessagesComponent } from './global-messages/global-messages.component';
 
-import { rootReducer, IAppState, INITIAL_STATE } from './store';
+import { combinedReducer, IAppState, INITIAL_STATE } from './store';
 
-import { TodoService } from './todo.service';
+import { TodoService } from './todo/todo.service';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -19,7 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppComponent,
     TodoDashboardComponent,
     TodoListComponent,
-    NavbarComponent
+    NavbarComponent,
+    GlobalMessagesComponent
   ],
   imports: [
     BrowserModule, FormsModule, NgReduxModule, HttpClientModule
@@ -28,7 +31,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+  constructor(ngRedux: NgRedux<IAppState>, devTools: DevToolsExtension) {
+      var enhancers = isDevMode() ? [devTools.enhancer()] : [];
+      ngRedux.configureStore(combinedReducer, INITIAL_STATE, [], enhancers);
+    }
   }
-}
