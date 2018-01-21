@@ -1,0 +1,12 @@
+<div *ngFor="let message of globalMessages | async">
+  <article class="message is-success" *ngIf="message.success">
+    <div class="message-body">
+      {{message.success}}
+    </div>
+  </article>
+  <article class="message is-info" *ngIf="message.info">
+    <div class="message-body">
+      {{message.info}}
+    </div>
+  </article>
+</div>

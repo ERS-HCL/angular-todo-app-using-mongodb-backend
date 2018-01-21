@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
-import { IAppState } from '../store';
+import { select } from '@angular-redux/store';
 import { REMOVE_TODO, TOOGLE_TODO } from '../actions';
 import { TodoService } from '../todo.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-todo-list',
@@ -10,9 +10,9 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  @select() todos;
-  @select() lastUpdate;
-  constructor(private ngRedux: NgRedux<IAppState>, private _todoService: TodoService) { }
+  @select(s => s.todoing.todos) todos;
+
+  constructor(private _todoService: TodoService) { }
 
   ngOnInit() {
     this._todoService.getTodos();
