@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { TodoDashboardComponent } from './todo/todo-dashboard/todo-dashboard.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { GlobalMessagesComponent } from './global-messages/global-messages.component';
+import { GlobalModalComponent } from './global-modal/global-modal.component';
 
 import { combinedReducer, IAppState, INITIAL_STATE } from './store';
 
@@ -23,10 +24,14 @@ import { NavbarComponent } from './navbar/navbar.component';
     TodoDashboardComponent,
     TodoListComponent,
     NavbarComponent,
-    GlobalMessagesComponent
+    GlobalMessagesComponent,
+    GlobalModalComponent
   ],
   imports: [
-    BrowserModule, FormsModule, NgReduxModule, HttpClientModule
+    BrowserModule,
+    FormsModule,
+    NgReduxModule,
+    HttpClientModule
   ],
   providers: [TodoService],
   bootstrap: [AppComponent]
