@@ -1,0 +1,37 @@
+<!-- alert modal -->
+<div class="modal" [class.is-active]="(modalObject | async).warning" *ngIf="(modalObject | async).warning">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <input type="hidden" #id [value]="(modalObject | async).id"/>
+        <header class="modal-card-head">
+            <p class="modal-card-title">{{(modalObject | async).heading}}</p>
+            <button class="delete" aria-label="close" (click)="disableModal()"></button>
+        </header>
+        <section class="modal-card-body">
+            {{(modalObject | async).message}}
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-danger" (click)="removeTodo(id.value)">REMOVE TODO</button>
+            <button class="button" (click)="disableModal()">Cancel</button>
+        </footer>
+    </div>
+</div>
+
+
+<!-- info modal -->
+<!-- <div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Modal title</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            Content 
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success">Save changes</button>
+            <button class="button">Cancel</button>
+        </footer>
+    </div>
+</div> -->

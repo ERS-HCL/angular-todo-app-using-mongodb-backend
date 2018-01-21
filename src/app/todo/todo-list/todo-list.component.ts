@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { select } from '@angular-redux/store';
-import { REMOVE_TODO, TOOGLE_TODO } from '../actions';
+import { NgRedux, select } from '@angular-redux/store';
+import { WARNING } from '../../global-modal/actions';
 import { TodoService } from '../todo.service';
 import { Observable } from 'rxjs/Observable';
+import { IAppState } from '../../store';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,14 +13,20 @@ import { Observable } from 'rxjs/Observable';
 export class TodoListComponent implements OnInit {
   @select(s => s.todoing.todos) todos;
 
-  constructor(private _todoService: TodoService) { }
+  constructor(private _todoService: TodoService, private ngRedux: NgRedux<IAppState>) { }
 
   ngOnInit() {
     this._todoService.getTodos();
   }
 
   removeTodo(id) {
-    this._todoService.removeTodo(id);
+    let warningObject = {
+      warning: true,
+      heading: 'Remove todo warning',
+      message: 'Are you sure you want to delete this todo?',
+      id: id
+    }
+    this.ngRedux.dispatch({ type: WARNING, payload: warningObject });
   }
 
   toogleTodo(id, isCompleted) {
