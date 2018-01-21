@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ADD_TODO } from '../actions';
 import { NgRedux } from '@angular-redux/store';
-import { ITodo } from '../todo.model';
 import { TodoService } from '../todo.service';
 
 @Component({

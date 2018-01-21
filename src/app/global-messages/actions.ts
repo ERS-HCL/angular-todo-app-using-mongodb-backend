@@ -1,3 +1,3 @@
-export const SUCCESS = 'SUCCESS';
-export const WARNING = 'WARNING';
-export const INFO = 'INFO';
+export const SUCCESS_MESSAGE = 'SUCCESS_MESSAGE';
+export const INFO_MESSAGE = 'INFO_MESSAGE';
+export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';

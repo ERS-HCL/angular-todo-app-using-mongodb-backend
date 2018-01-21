@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select } from '@angular-redux/store';
 import { REMOVE_TODO, TOOGLE_TODO } from '../actions';
 import { TodoService } from '../todo.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-todo-list',

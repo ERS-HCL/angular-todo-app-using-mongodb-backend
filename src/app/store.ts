@@ -1,5 +1,6 @@
-import { combineReducers, Reducer } from 'redux';
+import { combineReducers } from 'redux';
 import { ITODOState, TODO_INITIAL_STATE, todoReducer } from './todo/store';
+import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 
 import { IGlobalMessageState, GLOBAL_MESSAGE_INITIAL_STATE, globalMessageReducer } from './global-messages/store';
 
@@ -13,8 +14,12 @@ export const INITIAL_STATE: IAppState = {
     globalMessaging: GLOBAL_MESSAGE_INITIAL_STATE
 }
 
-export const combinedReducer = combineReducers({
-    globalMessaging: globalMessageReducer, todoing: todoReducer
-});
+export const combinedReducer = composeReducers(
+    combineReducers({
+        globalMessaging: globalMessageReducer,
+        todoing: todoReducer
+    }),
+    defaultFormReducer()
+);
 
 

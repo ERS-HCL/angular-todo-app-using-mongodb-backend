@@ -9,10 +9,10 @@ import { IAppState } from '../store';
 })
 export class GlobalMessagesComponent implements OnInit {
   @select(s => s.globalMessaging.globalMessages) globalMessages;
+  
   constructor(private ngRedux: NgRedux<IAppState>) { }
 
   ngOnInit() {
-    console.log(this.globalMessages);
   }
 
 }
