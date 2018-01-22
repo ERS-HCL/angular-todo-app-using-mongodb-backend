@@ -9,7 +9,7 @@ import { IAppState } from '../store';
   styleUrls: ['./common-messages.component.css']
 })
 export class CommonMessagesComponent implements OnInit {
-  @select(s => s.commonMessaging.commonMessages) commonMessages;
+  @select(s => s.commonMessageState.commonMessages) commonMessages;
   
   constructor(private ngRedux: NgRedux<IAppState>) { }
 

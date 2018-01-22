@@ -1,15 +1,26 @@
 import * as _ from 'lodash';
+import { tassign } from 'tassign';
 
 import { ADD_TODO, REMOVE_TODO, TOOGLE_TODO, FETCH_TODO_SUCCESS } from './actions';
 
+export interface ITodoModel {
+    id: string;
+    desc: string;
+    priority: string,
+    lastUpdated?: string
+}
 
 export interface ITODOState {
-    todos: any[]
+    todos: ITodoModel[]
 }
 
-export const TODO_INITIAL_STATE = {
-    todos: []
+export const TODO_INITIAL_STATE: ITodoModel = 
+{
+    id: '',
+    desc: '',
+    priority: ''
 }
+
 
 function addTodo(state, action) {
     _.reverse(state.todos);
@@ -42,7 +53,7 @@ function fetchTodoSuccess(state, action) {
     });
 }
 
-export function todoReducer(state: ITODOState = TODO_INITIAL_STATE, action): ITODOState {
+export function todoReducer(state: ITodoModel = TODO_INITIAL_STATE, action): ITodoModel {
     switch (action.type) {
         case ADD_TODO: return addTodo(state, action);
         case REMOVE_TODO: return removeTodo(state, action);
