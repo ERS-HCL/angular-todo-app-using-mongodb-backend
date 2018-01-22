@@ -1,27 +1,27 @@
 import { combineReducers } from 'redux';
-import { ITODOState, TODO_INITIAL_STATE, todoReducer } from './todo/store';
-import { globalModalReducer, IGlobalModalState, MODAL_INITIAL_STATE } from './global-modal/store';
 import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 
-import { IGlobalMessageState, GLOBAL_MESSAGE_INITIAL_STATE, globalMessageReducer } from './global-messages/store';
+import { ITODOState, TODO_INITIAL_STATE, todoReducer } from './todo';
+import { commonModalReducer, ICommonModalState, MODAL_INITIAL_STATE } from './common-modal';
+import { ICommonMessageState, MESSAGE_INITIAL_STATE, commonMessageReducer } from './common-messages';
 
 export interface IAppState {
     todoing: ITODOState;
-    globalMessaging: IGlobalMessageState;
-    globalModling: IGlobalModalState;
+    commonMessaging: ICommonMessageState;
+    commonModling: ICommonModalState;
 }
 
 export const INITIAL_STATE: IAppState = {
     todoing: TODO_INITIAL_STATE,
-    globalMessaging: GLOBAL_MESSAGE_INITIAL_STATE,
-    globalModling: MODAL_INITIAL_STATE
+    commonMessaging: MESSAGE_INITIAL_STATE,
+    commonModling: MODAL_INITIAL_STATE
 }
 
 export const combinedReducer = composeReducers(
     combineReducers({
-        globalMessaging: globalMessageReducer,
+        commonMessaging: commonMessageReducer,
         todoing: todoReducer,
-        globalModling: globalModalReducer
+        commonModling: commonModalReducer
     }),
     defaultFormReducer()
 );

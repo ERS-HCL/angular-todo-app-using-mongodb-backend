@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
-import { TodoService } from '../todo/todo.service';
 import { Observable } from 'rxjs/Observable';
+
+import { TodoService } from '../todo';
 import { IAppState } from '../store';
 import { DISABLE_MODAL } from './actions';
+
 @Component({
-    selector: 'app-global-modal',
-    templateUrl: './global-modal.component.html',
-    styleUrls: ['./global-modal.component.css']
+    selector: 'app-common-modal',
+    templateUrl: './common-modal.component.html',
+    styleUrls: ['./common-modal.component.css']
 })
 
-export class GlobalModalComponent implements OnInit {
-    @select(s => s.globalModling.modalObject) modalObject;
+export class CommonModalComponent implements OnInit {
+    @select(s => s.commonModling.modalObject) modalObject;
 
     data = {
         enableModal: true

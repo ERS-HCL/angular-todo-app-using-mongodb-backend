@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { NgRedux, select } from '@angular-redux/store';
+
 import { IAppState } from '../store';
 import { ADD_TODO, REMOVE_TODO, FETCH_TODO_SUCCESS, TOOGLE_TODO } from './actions';
-import { SUCCESS_MESSAGE, REMOVE_MESSAGE, INFO_MESSAGE } from '../global-messages/actions';
+import { SUCCESS_MESSAGE, REMOVE_MESSAGE, INFO_MESSAGE } from '../common-messages/actions';
 
 @Injectable()
 export class TodoService {

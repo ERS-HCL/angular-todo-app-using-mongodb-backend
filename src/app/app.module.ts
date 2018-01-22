@@ -1,22 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, isDevMode } from '@angular/core';
-// import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store';
 import { HttpClientModule } from '@angular/common/http';
+// import { RouterModule, Routes } from '@angular/router';
 // import { Reducer } from 'redux';
 // import { createLogger } from 'redux-logger';
 
 import { AppComponent } from './app.component';
-import { TodoDashboardComponent } from './todo/todo-dashboard/todo-dashboard.component';
-import { TodoListComponent } from './todo/todo-list/todo-list.component';
-import { GlobalMessagesComponent } from './global-messages/global-messages.component';
-import { GlobalModalComponent } from './global-modal/global-modal.component';
+import { TodoDashboardComponent } from './todo';
+import { TodoListComponent } from './todo';
+import { CommonMessagesComponent } from './common-messages';
+import { CommonModalComponent } from './common-modal';
+import { NavbarComponent } from './navbar';
 
 import { combinedReducer, IAppState, INITIAL_STATE } from './store';
 
-import { TodoService } from './todo/todo.service';
-import { NavbarComponent } from './navbar/navbar.component';
+import { TodoService } from './todo';
+
 
 @NgModule({
   declarations: [
@@ -24,8 +25,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     TodoDashboardComponent,
     TodoListComponent,
     NavbarComponent,
-    GlobalMessagesComponent,
-    GlobalModalComponent
+    CommonMessagesComponent,
+    CommonModalComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     NgReduxModule,
     HttpClientModule
   ],
-  providers: [TodoService],
+  providers: [
+    TodoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
