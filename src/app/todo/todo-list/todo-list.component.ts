@@ -12,7 +12,7 @@ import { IAppState } from '../../store';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  @select(s => s.todoing.todos) todos;
+  @select(s => s.todoState.todos) todos;
 
   constructor(private _todoService: TodoService, private ngRedux: NgRedux<IAppState>) { }
 

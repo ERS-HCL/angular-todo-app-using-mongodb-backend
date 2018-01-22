@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 import { NgRedux, select } from '@angular-redux/store';
 
 import { IAppState } from '../store';
 import { ADD_TODO, REMOVE_TODO, FETCH_TODO_SUCCESS, TOOGLE_TODO } from './actions';
-import { SUCCESS_MESSAGE, REMOVE_MESSAGE, INFO_MESSAGE } from '../common-messages/actions';
+import { SUCCESS_MESSAGE, REMOVE_MESSAGE, INFO_MESSAGE } from '../common-messages';
 
 @Injectable()
 export class TodoService {
@@ -17,8 +18,10 @@ export class TodoService {
     }
 
     addTodo(todo) {
-        this._http.post(this.URL + '/todos', todo).subscribe(todo => {
-            this.ngRedux.dispatch({ type: ADD_TODO, todo: todo });
+        this._http.post(this.URL + '/todos', todo)
+        .map((todo) => ({ type: ADD_TODO, todo: todo }))
+        .subscribe(todo => {
+            this.ngRedux.dispatch(todo);
             this.ngRedux.dispatch({ type: SUCCESS_MESSAGE, payload: { success: 'Your todo added successfully.' } });
             setTimeout(() => {
                 this.ngRedux.dispatch({ type: REMOVE_MESSAGE });
@@ -27,20 +30,26 @@ export class TodoService {
     }
 
     getTodos() {
-        this._http.get(this.URL + '/todos').subscribe(todos => {
-            this.ngRedux.dispatch({ type: FETCH_TODO_SUCCESS, todos: todos });
+        this._http.get(this.URL + '/todos')
+        .map((todos) => ({ type: FETCH_TODO_SUCCESS, todos: todos }))
+        .subscribe((todos) => {
+            this.ngRedux.dispatch(todos);
         });
     }
 
     removeTodo(id) {
-        this._http.delete(this.URL + '/todos/' + id).subscribe(todoId => {
-            this.ngRedux.dispatch({ type: REMOVE_TODO, todoId: todoId });
+        this._http.delete(this.URL + '/todos/' + id)
+        .map((todoId) => ({ type: REMOVE_TODO, todoId: todoId }))
+        .subscribe(todoId => {
+            this.ngRedux.dispatch(todoId);
         });
     }
 
     toggleTodo(id, isCompleted, lastUpdated) {
-        this._http.patch(this.URL + '/todos/' + id, { 'isCompleted': isCompleted, 'lastUpdated': lastUpdated }).subscribe(todo => {
-            this.ngRedux.dispatch({ type: TOOGLE_TODO, todo: todo });
+        this._http.patch(this.URL + '/todos/' + id, { 'isCompleted': isCompleted, 'lastUpdated': lastUpdated })
+        .map((todo) => ({ type: TOOGLE_TODO, todo: todo }))
+        .subscribe(todo => {
+            this.ngRedux.dispatch(todo);
             if (isCompleted) {
                 this.ngRedux.dispatch({ type: INFO_MESSAGE, payload: { info: 'Todo status changed to completed.' } });
             } else {

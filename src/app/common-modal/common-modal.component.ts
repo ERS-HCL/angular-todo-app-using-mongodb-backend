@@ -13,11 +13,8 @@ import { DISABLE_MODAL } from './actions';
 })
 
 export class CommonModalComponent implements OnInit {
-    @select(s => s.commonModling.modalObject) modalObject;
+    @select(s => s.commonModleState.modalObject) modalObject;
 
-    data = {
-        enableModal: true
-    }
     constructor(private _todoService: TodoService, private ngRedux: NgRedux<IAppState>) { }
 
     ngOnInit() {
