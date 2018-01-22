@@ -1,5 +1,7 @@
-import { ADD_TODO, REMOVE_TODO, TOOGLE_TODO, FETCH_TODO_SUCCESS } from './actions';
 import * as _ from 'lodash';
+
+import { ADD_TODO, REMOVE_TODO, TOOGLE_TODO, FETCH_TODO_SUCCESS } from './actions';
+
 
 export interface ITODOState {
     todos: any[]

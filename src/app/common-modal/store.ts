@@ -1,7 +1,7 @@
 import { WARNING, DISABLE_MODAL } from './actions';
 import * as _ from 'lodash';
 
-export interface IGlobalModalState {
+export interface ICommonModalState {
     modalObject: any
 }
 
@@ -17,7 +17,7 @@ function disableModal(state, action) {
     return Object.assign({}, state, { modalObject: action.payload });
 }
 
-export function globalModalReducer(state: IGlobalModalState = MODAL_INITIAL_STATE, action): IGlobalModalState {
+export function commonModalReducer(state: ICommonModalState = MODAL_INITIAL_STATE, action): ICommonModalState {
     switch (action.type) {
         case WARNING: return warningModal(state, action);
         case DISABLE_MODAL: return disableModal(state, action);

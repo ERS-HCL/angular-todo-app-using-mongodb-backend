@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
-import { WARNING } from '../../global-modal/actions';
-import { TodoService } from '../todo.service';
 import { Observable } from 'rxjs/Observable';
+
+import { WARNING } from '../../common-modal/actions';
+import { TodoService } from '../todo.service';
 import { IAppState } from '../../store';
 
 @Component({
