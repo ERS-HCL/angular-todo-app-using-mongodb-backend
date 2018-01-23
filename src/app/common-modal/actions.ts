@@ -1,2 +1,2 @@
-export const WARNING = 'WARNING';
+export const CONFIRM = 'CONFIRM';
 export const DISABLE_MODAL = 'DISABLE_MODAL';

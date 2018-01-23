@@ -6,7 +6,7 @@ import { commonModalReducer, ICommonModalState, MODAL_INITIAL_STATE } from './co
 import { ICommonMessageState, MESSAGE_INITIAL_STATE, commonMessageReducer } from './common-messages';
 
 export interface IAppState {
-    todoState: ITodoModel;
+    todoState: ITODOState;
     commonMessageState: ICommonMessageState;
     commonModleState: ICommonModalState;
 }

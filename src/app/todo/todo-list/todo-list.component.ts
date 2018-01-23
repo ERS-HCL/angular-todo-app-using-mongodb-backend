@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 
-import { WARNING } from '../../common-modal/actions';
+import { CONFIRM } from '../../common-modal/actions';
+import { ICommonModalModel } from '../../common-modal/store';
 import { TodoService } from '../todo.service';
 import { IAppState } from '../../store';
 
@@ -21,13 +22,13 @@ export class TodoListComponent implements OnInit {
   }
 
   removeTodo(id) {
-    let warningObject = {
-      warning: true,
-      heading: 'Remove todo warning',
+    let confirmObject: ICommonModalModel = {
+      messageType: 'confirm',
+      heading: 'Confirm Modal',
       message: 'Are you sure you want to delete this todo?',
-      id: id
+      removeTodoId: id
     }
-    this.ngRedux.dispatch({ type: WARNING, payload: warningObject });
+    this.ngRedux.dispatch({ type: CONFIRM, payload: confirmObject });
   }
 
   toogleTodo(id, isCompleted) {

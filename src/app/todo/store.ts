@@ -4,9 +4,10 @@ import { tassign } from 'tassign';
 import { ADD_TODO, REMOVE_TODO, TOOGLE_TODO, FETCH_TODO_SUCCESS } from './actions';
 
 export interface ITodoModel {
-    id: string;
-    desc: string;
-    priority: string,
+    _id?: string;
+    desc?: string;
+    priority?: string,
+    isCompleted?: boolean,
     lastUpdated?: string
 }
 
@@ -14,31 +15,27 @@ export interface ITODOState {
     todos: ITodoModel[]
 }
 
-export const TODO_INITIAL_STATE: ITodoModel = 
-{
-    id: '',
-    desc: '',
-    priority: ''
+export const TODO_INITIAL_STATE = {
+    todos: []
 }
 
-
-function addTodo(state, action) {
+function addTodo(state: ITODOState, action) {
     _.reverse(state.todos);
-    return Object.assign({}, state, {
-        todos: _.reverse(state.todos.concat(Object.assign({}, action.todo)))
+    return tassign(state, {
+        todos: _.reverse(state.todos.concat(tassign(action.todo)))
     });
 }
 
-function removeTodo(state, action) {
-    return Object.assign({}, state, {
+function removeTodo(state: ITODOState, action) {
+    return tassign(state, {
         todos: _.filter(state.todos, todo => todo._id !== action.todoId)
     });
 }
 
-function toggleTodo(state, action) {
-    let todo = state.todos.find(todo => todo._id == action.todo._id);
+function toggleTodo(state: ITODOState, action) {
+    let todo : ITodoModel = state.todos.find(todo => todo._id == action.todo._id);
     let index = state.todos.indexOf(todo);
-    return Object.assign({}, state, {
+    return tassign(state, {
         todos: [
             ...state.todos.slice(0, index),
             Object.assign({}, todo, { isCompleted: action.todo.isCompleted, lastUpdated: action.todo.lastUpdated }),
@@ -47,13 +44,13 @@ function toggleTodo(state, action) {
     });
 }
 
-function fetchTodoSuccess(state, action) {
-    return Object.assign({}, state, {
+function fetchTodoSuccess(state: ITODOState, action) {
+    return tassign(state, {
         todos: _.reverse(action.todos)
     });
 }
 
-export function todoReducer(state: ITodoModel = TODO_INITIAL_STATE, action): ITodoModel {
+export function todoReducer(state: ITODOState = TODO_INITIAL_STATE, action): ITODOState  {
     switch (action.type) {
         case ADD_TODO: return addTodo(state, action);
         case REMOVE_TODO: return removeTodo(state, action);
