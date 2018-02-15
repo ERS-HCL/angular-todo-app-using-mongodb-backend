@@ -1,14 +1,7 @@
 import * as _ from 'lodash';
-import { tassign } from 'tassign';
-
 import { REMOVE_MESSAGE, SUCCESS_MESSAGE, INFO_MESSAGE } from './actions';
 
-export interface ICommonMessageModal {
-    info?: string;
-    success?: string;
-    warning?: string;
-    danger?: string;
-}
+import { ICommonMessageModal } from './common-message.model';
 
 export interface ICommonMessageState {
     commonMessages: ICommonMessageModal[]
@@ -19,15 +12,15 @@ export const MESSAGE_INITIAL_STATE = {
 }
 
 function showSuccessMessage(state: ICommonMessageState, action) {
-    return tassign(state, { commonMessages: state.commonMessages.concat(action.payload) });
+    return Object.assign({}, state, { commonMessages: state.commonMessages.concat(action.payload) });
 }
 
 function showInfoMessage(state: ICommonMessageState, action) {
-    return tassign(state, { commonMessages: state.commonMessages.concat(action.payload) });
+    return Object.assign({}, state, { commonMessages: state.commonMessages.concat(action.payload) });
 }
 
 function clearMessage(state: ICommonMessageState, action) {
-    return tassign(state, { commonMessages: [] });
+    return Object.assign({}, state, { commonMessages: [] });
 }
 
 export function commonMessageReducer(state: ICommonMessageState = MESSAGE_INITIAL_STATE, action): ICommonMessageState {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
+import { Store } from "@ngrx/store";
 
 import { TodoService } from '../todo';
-import { IAppState } from '../store';
+import { AppStore } from '../app-store.model';
 import { DISABLE_MODAL } from './actions';
 
 @Component({
@@ -13,19 +13,24 @@ import { DISABLE_MODAL } from './actions';
 })
 
 export class CommonModalComponent implements OnInit {
-    @select(s => s.commonModleState.modalObject) modalObject;
+    modalObject: any;
 
-    constructor(private _todoService: TodoService, private ngRedux: NgRedux<IAppState>) { }
+    constructor(private store: Store<AppStore>, private _todoService: TodoService) { }
 
     ngOnInit() {
+        this.store.select('commonModal').subscribe((object) => {
+            this.modalObject = object;
+            console.log(this.modalObject);
+        }
+        );
     }
 
     removeTodo(id) {
         this._todoService.removeTodo(id);
-        this.ngRedux.dispatch({ type: DISABLE_MODAL, payload: {} });
+        this.store.dispatch({ type: DISABLE_MODAL, payload: {} });
     }
 
     disableModal() {
-        this.ngRedux.dispatch({ type: DISABLE_MODAL, payload: {} })
+        this.store.dispatch({ type: DISABLE_MODAL, payload: {} })
     }
 }

@@ -1,7 +1,6 @@
-import { combineReducers } from 'redux';
-import { composeReducers, defaultFormReducer } from '@angular-redux/form';
+import { combineReducers } from '@ngrx/store';
 
-import { ITODOState, TODO_INITIAL_STATE, todoReducer, ITodoModel } from './todo';
+import { ITODOState, TODO_INITIAL_STATE, todoReducer } from './todo';
 import { commonModalReducer, ICommonModalState, MODAL_INITIAL_STATE } from './common-modal';
 import { ICommonMessageState, MESSAGE_INITIAL_STATE, commonMessageReducer } from './common-messages';
 
@@ -17,13 +16,12 @@ export const INITIAL_STATE: IAppState = {
     commonModleState: MODAL_INITIAL_STATE
 }
 
-export const combinedReducer = composeReducers(
-    combineReducers({
+export function AppReducer(state: any, action: any) {
+    return {
         commonMessageState: commonMessageReducer,
         todoState: todoReducer,
         commonModleState: commonModalReducer
-    }),
-    defaultFormReducer()
-);
+    }
+}
 
 

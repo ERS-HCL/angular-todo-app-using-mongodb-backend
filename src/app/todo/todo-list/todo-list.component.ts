@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
+import { Store } from "@ngrx/store";
 
 import { CONFIRM } from '../../common-modal/actions';
-import { ICommonModalModel } from '../../common-modal/store';
 import { TodoService } from '../todo.service';
 import { IAppState } from '../../store';
+import { ITODOState, TODO_INITIAL_STATE, todoReducer } from '../store';
+import { AppStore } from '../../app-store.model';
+import { ITodoModel } from '../todo.model';
+import { ICommonModalModel } from '../../common-modal/common-modal.model';
 
 @Component({
   selector: 'app-todo-list',
@@ -13,22 +16,25 @@ import { IAppState } from '../../store';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  @select(s => s.todoState.todos) todos;
+  todos: ITodoModel[];
 
-  constructor(private _todoService: TodoService, private ngRedux: NgRedux<IAppState>) { }
+  constructor(private store: Store<AppStore>, private _todoService: TodoService) { this._todoService.getTodos(); }
 
   ngOnInit() {
-    this._todoService.getTodos();
+    this.store.select("todos").subscribe((todo) => {
+      this.todos = todo;
+      console.log(this.todos);
+    });
   }
 
   removeTodo(id) {
-    let confirmObject: ICommonModalModel = {
+    let confirmObject  = {
       messageType: 'confirm',
       heading: 'Confirm Modal',
       message: 'Are you sure you want to delete this todo?',
       removeTodoId: id
     }
-    this.ngRedux.dispatch({ type: CONFIRM, payload: confirmObject });
+    this.store.dispatch({ type: CONFIRM, payload: confirmObject });
   }
 
   toogleTodo(id, isCompleted) {

@@ -1,14 +1,8 @@
 import * as _ from 'lodash';
-import { tassign } from 'tassign';
 
 import { CONFIRM, DISABLE_MODAL } from './actions';
+import { ICommonModalModel } from './common-modal.model';
 
-export interface ICommonModalModel{
-    messageType?: string;
-    heading?: string;
-    message?: string;
-    removeTodoId?: string;
-}
 
 export interface ICommonModalState {
     modalObject: ICommonModalModel
@@ -19,11 +13,12 @@ export const MODAL_INITIAL_STATE: ICommonModalState = {
 }
 
 function confirmModal(state: ICommonModalState, action) {
-    return tassign(state, { modalObject: action.payload });
+    console.log('confirm');
+    return Object.assign({}, state, { modalObject: action.payload });
 }
 
 function disableModal(state: ICommonModalState, action) {
-    return tassign(state, { modalObject: action.payload });
+    return Object.assign({}, state, { modalObject: action.payload });
 }
 
 export function commonModalReducer(state: ICommonModalState = MODAL_INITIAL_STATE, action): ICommonModalState {

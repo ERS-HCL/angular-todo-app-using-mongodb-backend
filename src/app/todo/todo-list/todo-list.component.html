@@ -1,4 +1,4 @@
-<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-success" *ngIf="(todos | async).length > 0">
+<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth is-success" *ngIf="todos.todos.length > 0">
   <thead>
     <tr>
       <th>Description</th>
@@ -8,11 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let todo of todos | async">
+    <tr *ngFor="let todo of todos.todos">
       <td class="cursor-pointer" [class.line-through]="todo.isCompleted" (click)="toogleTodo(todo._id, todo.isCompleted)">{{todo.desc}}</td>
       <td class="cursor-pointer" [class.line-through]="todo.isCompleted" (click)="toogleTodo(todo._id, todo.isCompleted)">{{todo.priority}}</td>
       <td class="cursor-pointer" [class.line-through]="todo.isCompleted" (click)="toogleTodo(todo._id, todo.isCompleted)">{{todo.lastUpdated | date: 'dd/MM/yyyy'}}</td>
-      <td><button class="button is-outlined is-danger" (click)="removeTodo(todo._id)">REMOVE TODO</button></td>
+      <td>
+        <button class="button is-outlined is-danger" (click)="removeTodo(todo._id)">REMOVE TODO</button>
+      </td>
     </tr>
   </tbody>
 </table>
