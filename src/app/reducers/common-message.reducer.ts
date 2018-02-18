@@ -1,10 +1,9 @@
 import * as _ from 'lodash';
-import { REMOVE_MESSAGE, SUCCESS_MESSAGE, INFO_MESSAGE } from './actions';
-
-import { ICommonMessageModal } from './common-message.model';
+import { REMOVE_MESSAGE, SUCCESS_MESSAGE, INFO_MESSAGE } from '../actions/common-messages.actions';
+import { ICommonMessageModel } from '../models/common-messages.model';
 
 export interface ICommonMessageState {
-    commonMessages: ICommonMessageModal[]
+    commonMessages: ICommonMessageModel[]
 }
 
 export const MESSAGE_INITIAL_STATE = {

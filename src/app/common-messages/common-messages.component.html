@@ -1,4 +1,4 @@
-<div *ngFor="let message of commonMessages | async">
+<div *ngFor="let message of messages.commonMessages">
   <article class="message is-success" *ngIf="message.success">
     <div class="message-body">
       {{message.success}}

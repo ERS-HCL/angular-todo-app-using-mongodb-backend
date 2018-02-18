@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IAppState } from '../store';
+import { Store } from '@ngrx/store';
+
+import { AppStore } from '../models/app-store.model';
+import { ICommonMessageModel } from '../models/common-messages.model';
 
 @Component({
   selector: 'app-common-messages',
@@ -7,11 +10,16 @@ import { IAppState } from '../store';
   styleUrls: ['./common-messages.component.css']
 })
 export class CommonMessagesComponent implements OnInit {
-  
-  
-  constructor() { }
+  private messages: ICommonMessageModel[];
+
+  constructor(private store: Store<AppStore>) { }
 
   ngOnInit() {
+    this.store.select('commonMessage').subscribe(
+      (message) => {
+        this.messages = message;
+      }
+    );
   }
 
 }

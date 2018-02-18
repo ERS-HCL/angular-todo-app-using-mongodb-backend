@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
-
-import { CONFIRM, DISABLE_MODAL } from './actions';
-import { ICommonModalModel } from './common-modal.model';
+import { CONFIRM, DISABLE_MODAL } from '../actions/common-modal.actions';
+import { ICommonModalModel } from '../models/common-modal.model';
 
 
 export interface ICommonModalState {
@@ -13,7 +12,6 @@ export const MODAL_INITIAL_STATE: ICommonModalState = {
 }
 
 function confirmModal(state: ICommonModalState, action) {
-    console.log('confirm');
     return Object.assign({}, state, { modalObject: action.payload });
 }
 

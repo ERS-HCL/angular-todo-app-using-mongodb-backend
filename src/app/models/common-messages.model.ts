@@ -1,4 +1,4 @@
-export interface ICommonMessageModal {
+export interface ICommonMessageModel {
     info?: string;
     success?: string;
     warning?: string;

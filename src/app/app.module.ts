@@ -1,31 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { RouterModule, Routes } from '@angular/router';
-// import { Reducer } from 'redux';
-// import { createLogger } from 'redux-logger';
-import { AppComponent } from './app.component';
-import { TodoDashboardComponent } from './todo';
-import { TodoListComponent } from './todo';
-import { CommonMessagesComponent } from './common-messages';
-import { CommonModalComponent } from './common-modal';
-import { NavbarComponent } from './navbar';
+import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService, Ng4LoadingSpinnerComponent  } from 'ng4-loading-spinner';
 
-import { AppReducer, IAppState, INITIAL_STATE } from './store';
-import { ITODOState, TODO_INITIAL_STATE, todoReducer } from './todo';
-import { TodoService } from './todo';
-
-
-
-import { Store, StoreModule, combineReducers } from '@ngrx/store';
-import { compose } from '@ngrx/core/compose';
+// @ngRx/store settings
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
-import { localStorageSync } from 'ngrx-store-localstorage';
-
-import { commonModalReducer, ICommonModalState, MODAL_INITIAL_STATE } from './common-modal';
-import { ICommonMessageState, MESSAGE_INITIAL_STATE, commonMessageReducer } from './common-messages';
 
 export function instrumentOptions() {
   return {
@@ -33,14 +15,21 @@ export function instrumentOptions() {
   };
 }
 
-const reducers = {
-  todos: todoReducer,
-  commonModal: commonModalReducer,
-  commonMessage: commonMessageReducer
-};
-const appReducer = compose(
-localStorageSync({keys: ['todos', 'commonModal', 'commonMessage'], rehydrate : true}), 
-combineReducers)(reducers);
+//components
+import { AppComponent } from './app.component';
+import { TodoDashboardComponent } from './todo/todo-dashboard/todo-dashboard.component';
+import { TodoListComponent } from './todo/todo-list/todo-list.component';
+import { CommonMessagesComponent } from './common-messages/common-messages.component';
+import { CommonModalComponent } from './common-modal/common-modal.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
+//services
+import { TodoService } from './todo/todo.service';
+
+//Reducers
+import { todoReducer } from './reducers/todo.reducer';
+import { commonModalReducer } from './reducers/common-modal.reducer';
+import { commonMessageReducer } from './reducers/common-message.reducer';
 
 @NgModule({
   declarations: [
@@ -52,14 +41,16 @@ combineReducers)(reducers);
     CommonModalComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,Ng4LoadingSpinnerModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({
-      todos: todoReducer,
-      commonModal: commonModalReducer,
-      commonMessage: commonMessageReducer
-    }),
+    StoreModule.forRoot(
+      {
+        todos: todoReducer,
+        commonModal: commonModalReducer,
+        commonMessage: commonMessageReducer
+      }
+    ),
     StoreDevtoolsModule.instrument(instrumentOptions),
     StoreLogMonitorModule,
   ],
@@ -68,8 +59,4 @@ combineReducers)(reducers);
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor() {
-
-  }
-}
+export class AppModule { }

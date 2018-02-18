@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
-import { ActionReducer, Action } from "@ngrx/store";
-import { ADD_TODO, REMOVE_TODO, TOOGLE_TODO, FETCH_TODO_SUCCESS } from './actions';
-import { ITodoModel } from './todo.model';
+import { ADD_TODO, REMOVE_TODO, TOOGLE_TODO, FETCH_TODO_SUCCESS } from '../actions/todo.actions';
+import { ITodoModel } from '../models/todo.model';
 
 export interface ITODOState {
     todos: ITodoModel[]
@@ -42,10 +41,8 @@ function fetchTodoSuccess(state: ITODOState, action) {
         todos: _.reverse(action.todos)
     });
 }
-export interface ActionWithPayload<T> extends Action {
-    payload: T;
-}
-export function todoReducer(state: ITODOState = TODO_INITIAL_STATE, action: ActionWithPayload<any>) {
+
+export function todoReducer(state: ITODOState = TODO_INITIAL_STATE, action) {
     switch (action.type) {
         case ADD_TODO: return addTodo(state, action);
         case REMOVE_TODO: return removeTodo(state, action);
